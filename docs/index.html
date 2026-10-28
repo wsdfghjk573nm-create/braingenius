@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BrainGenius – IQ Test &amp; Brain Challenge | Free Online IQ-Style Reasoning Test</title>
+<meta name="description" content="BrainGenius is a free, informal IQ-style reasoning test you can take right in your browser. 24 questions across logic, number series, patterns, verbal, spatial and maths reasoning, with practice mode and a daily challenge.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#" data-nav="home" aria-label="BrainGenius home">
+      <svg class="logo" viewBox="0 0 64 64" width="40" height="40" role="img" aria-label="BrainGenius logo">
+        <defs>
+          <linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#7c5cff"/><stop offset="1" stop-color="#00c2ff"/>
+          </linearGradient>
+        </defs>
+        <path d="M32 6a15 15 0 0 1 6 28.3c-1.9 1-3 2.4-3 4.7h-6c0-2.3-1.1-3.7-3-4.7A15 15 0 0 1 32 6z" fill="none" stroke="url(#lg1)" stroke-width="3.4" stroke-linejoin="round"/>
+        <path d="M26 20c2.5-3.5 6-3.5 7.5-1M24.5 27c3-1 5.5.5 6 3M38 19c-2-2-5-2-6.5 0M39 27c-2.8-1.2-5.3.2-6 2.6" fill="none" stroke="url(#lg1)" stroke-width="2.4" stroke-linecap="round"/>
+        <rect x="28.5" y="44" width="7" height="3.4" rx="1.4" fill="url(#lg1)"/>
+        <rect x="29.5" y="49" width="5" height="3.4" rx="1.4" fill="url(#lg1)"/>
+        <path d="M8 12l3.2 5.6H4.8z" fill="#ffb020"/>
+        <rect x="51" y="8" width="7" height="7" rx="1.5" fill="#00c2ff" transform="rotate(18 54.5 11.5)"/>
+        <circle cx="55" cy="46" r="3.6" fill="#ff5c8a"/>
+        <path d="M10 44l2 3.6h-4z" fill="#38e08c"/>
+      </svg>
+      <span class="brand-text">Brain<em>Genius</em></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+      <button data-nav="home">Home</button>
+      <button data-nav="start">Start Test</button>
+      <button data-nav="practice">Practice</button>
+      <button data-nav="daily">Daily Challenge</button>
+      <button data-nav="leaderboard">Leaderboard</button>
+      <button data-nav="progress">Your Progress</button>
+      <button data-nav="about">About</button>
+      <button data-nav="contact">Contact</button>
+    </nav>
+    <div class="header-actions">
+      <button id="soundToggle" class="icon-btn" aria-label="Turn sound effects on" title="Sound effects">🔇</button>
+      <button id="themeToggle" class="icon-btn" aria-label="Switch colour theme" title="Dark / light mode">🌙</button>
+    </div>
+  </div>
+</header>
+
+<main id="app">
+  <!-- ============ HOME ============ -->
+  <section id="view-home" class="view">
+    <div class="hero">
+      <h1>Discover Your Brainpower!</h1>
+      <p class="subtitle">Challenge your logical thinking, patterns, memory, and problem-solving skills.</p>
+      <button class="btn btn-primary btn-big" data-nav="start">Start IQ Test</button>
+      <div class="hero-facts">
+        <div class="fact"><strong id="factQuestions">36</strong><span>questions in the bank</span></div>
+        <div class="fact"><strong>24</strong><span>questions per full test</span></div>
+        <div class="fact"><strong>≈ 15 min</strong><span>estimated duration</span></div>
+        <div class="fact"><strong>6</strong><span>reasoning categories</span></div>
+      </div>
+    </div>
+
+    <div class="notice" role="note">
+      <strong>Please read:</strong> BrainGenius is an informal IQ-style reasoning test for fun and practice. It is not a clinically validated IQ assessment, and your percentage score is not a measured IQ.
+    </div>
+
+    <div class="notice" role="note">
+      This online version saves your progress only in this browser on this device. Accounts, the shared leaderboard and the admin panel run in the full BrainGenius app — its source code is in this GitHub repository.
+    </div>
+
+    <div class="card">
+      <h2>Try a sample question</h2>
+      <p class="sample-q" id="samplePrompt"></p>
+      <div class="options" id="sampleOptions"></div>
+      <p id="sampleFeedback" class="feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="card">
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li><strong>Pick a level</strong> — Easy, Medium, Hard or Mixed. No account and no sign-up: everything runs in your browser.</li>
+        <li><strong>Answer 24 questions</strong> — four from each of the six categories, in random order. You can move back and forth and change answers any time before submitting.</li>
+        <li><strong>See instant results</strong> — your score, a per-category breakdown and a full review with explanations for every question.</li>
+        <li><strong>Keep improving</strong> — use Practice mode and the Daily Challenge, earn badges, and follow your progress on the Your Progress page.</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>The six categories</h2>
+      <div class="chip-grid">
+        <span class="chip">🧩 Logical Reasoning</span>
+        <span class="chip">🔢 Number Series</span>
+        <span class="chip">🔷 Pattern Recognition</span>
+        <span class="chip">💬 Verbal Reasoning</span>
+        <span class="chip">🧭 Spatial Reasoning</span>
+        <span class="chip">➗ Basic Mathematical Reasoning</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is this a real IQ test?</summary><p>No. BrainGenius is an informal IQ-style reasoning quiz for fun and practice. It is not clinically validated, and your percentage is not an IQ score. A real IQ assessment is administered and interpreted by a qualified professional.</p></details>
+      <details><summary>Do I need an account?</summary><p>No. In this online version everything — the test, practice, daily challenge, local leaderboard and progress tracking — works in your browser with no sign-up at all.</p></details>
+      <details><summary>How is my score calculated?</summary><p>Your score is the percentage of the 24 questions you answered correctly. You also get a per-category breakdown so you can see your strengths.</p></details>
+      <details><summary>Can I change my answers?</summary><p>Yes. Move between questions with the Previous and Next buttons and change any answer before you submit. Submitting asks for confirmation and tells you how many questions are still unanswered.</p></details>
+      <details><summary>Is there a time limit?</summary><p>Only if you want one. Before starting you can switch on an optional countdown timer; when it runs out you will be prompted to submit.</p></details>
+      <details><summary>What is the Daily Challenge?</summary><p>Five questions that are the same for everyone on a given day. Come back tomorrow for a fresh set.</p></details>
+      <details><summary>Where is my data stored?</summary><p>Only in this browser on this device (local storage). Clearing your browser data erases it. Nothing is sent to a server by this online version.</p></details>
+    </div>
+  </section>
+
+  <!-- ============ START TEST ============ -->
+  <section id="view-start" class="view hidden">
+    <h2>Start your test</h2>
+    <p>Choose a difficulty. Every test has 24 questions — 4 from each category — drawn at random, so no two tests are exactly alike.</p>
+    <div class="level-grid" id="levelGrid" role="radiogroup" aria-label="Difficulty">
+      <button class="level-card selected" data-level="mixed" role="radio" aria-checked="true"><strong>Mixed</strong><span>A blend of all levels</span></button>
+      <button class="level-card" data-level="easy" role="radio" aria-checked="false"><strong>Easy</strong><span>Warm-up level</span></button>
+      <button class="level-card" data-level="medium" role="radio" aria-checked="false"><strong>Medium</strong><span>A solid challenge</span></button>
+      <button class="level-card" data-level="hard" role="radio" aria-checked="false"><strong>Hard</strong><span>For serious puzzlers</span></button>
+    </div>
+    <p class="hint">Note: the bank holds a limited number of questions at each level per category, so a level test prioritises that level and tops up from neighbouring levels where needed.</p>
+    <label class="switch-row">
+      <input type="checkbox" id="timerEnabled">
+      <span>Use a countdown timer</span>
+    </label>
+    <label class="timer-minutes" id="timerMinutesWrap">
+      Minutes: <input type="number" id="timerMinutes" value="15" min="1" max="120">
+    </label>
+    <div class="actions">
+      <button class="btn btn-primary btn-big" id="beginTestBtn">Begin Test</button>
+    </div>
+  </section>
+
+  <!-- ============ TEST RUNNER ============ -->
+  <section id="view-test" class="view hidden">
+    <div class="test-head">
+      <span id="testCounter" class="counter">Question 1 of 24</span>
+      <span id="testTimer" class="timer hidden" aria-live="off">15:00</span>
+    </div>
+    <div class="progress" role="progressbar" aria-label="Test progress"><div id="progressBar" class="progress-bar"></div></div>
+    <div class="card question-card">
+      <span class="q-meta" id="qCategory"></span>
+      <p class="q-prompt" id="qPrompt"></p>
+      <div class="options" id="qOptions"></div>
+    </div>
+    <div class="test-nav">
+      <button class="btn" id="prevBtn">← Previous</button>
+      <button class="btn btn-primary" id="nextBtn">Next →</button>
+      <button class="btn btn-danger" id="submitBtn">Submit Test</button>
+    </div>
+  </section>
+
+  <!-- ============ RESULTS ============ -->
+  <section id="view-results" class="view hidden">
+    <h2>Your results</h2>
+    <div class="notice" role="note">BrainGenius is an informal IQ-style reasoning test for fun and practice. It is not a clinically validated IQ assessment, and your percentage score is not a measured IQ.</div>
+    <div class="stats-grid">
+      <div class="stat"><strong id="resCorrect">0</strong><span>correct</span></div>
+      <div class="stat"><strong id="resAttempted">0</strong><span>attempted</span></div>
+      <div class="stat"><strong id="resTotal">0</strong><span>total questions</span></div>
+      <div class="stat"><strong id="resPercent">0%</strong><span>score</span></div>
+    </div>
+    <div class="card">
+      <h3>Performance by category</h3>
+      <div id="resCategories"></div>
+    </div>
+    <div class="card">
+      <h3>Add your result to this device's leaderboard</h3>
+      <div class="lb-post">
+        <input type="text" id="lbName" maxlength="30" placeholder="Display name (shown on this device)" aria-label="Leaderboard display name">
+        <button class="btn" id="lbPostBtn">Post result</button>
+        <span id="lbMsg" class="feedback"></span>
+      </div>
+      <p class="hint">The leaderboard on this online version is stored only in this browser — it is this device's leaderboard, not a shared online one.</p>
+    </div>
+    <div class="actions wrap">
+      <button class="btn btn-primary" id="retakeBtn">Retake Test</button>
+      <button class="btn" id="shareBtn">Share Result</button>
+      <button class="btn" data-nav="daily">Another Challenge</button>
+    </div>
+    <div class="card">
+      <h3>Review your answers</h3>
+      <div id="resReview"></div>
+    </div>
+  </section>
+
+  <!-- ============ PRACTICE ============ -->
+  <section id="view-practice" class="view hidden">
+    <h2>Practice mode</h2>
+    <p>No pressure and no score — get instant feedback and an explanation after every answer.</p>
+    <div class="filters">
+      <label>Category
+        <select id="practiceCategory">
+          <option value="">All categories</option>
+        </select>
+      </label>
+      <label>Difficulty
+        <select id="practiceDifficulty">
+          <option value="">All levels</option>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </label>
+      <button class="btn" id="practiceLoadBtn">Load question</button>
+    </div>
+    <div class="card question-card" id="practiceCard">
+      <span class="q-meta" id="pCategory"></span>
+      <p class="q-prompt" id="pPrompt">Press “Load question” to begin.</p>
+      <div class="options" id="pOptions"></div>
+      <p id="pFeedback" class="feedback" aria-live="polite"></p>
+      <div class="actions">
+        <button class="btn btn-primary hidden" id="practiceNextBtn">Next question →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DAILY ============ -->
+  <section id="view-daily" class="view hidden">
+    <h2>Daily Brain Challenge</h2>
+    <p>Five questions, the same for everyone today (<span id="dailyDate"></span>). A new set arrives tomorrow.</p>
+    <div class="actions">
+      <button class="btn btn-primary btn-big" id="dailyStartBtn">Start today's challenge</button>
+    </div>
+  </section>
+
+  <!-- ============ LEADERBOARD ============ -->
+  <section id="view-leaderboard" class="view hidden">
+    <h2>Leaderboard — this device</h2>
+    <p>Top scores posted on this device, in this browser. Display names only.</p>
+    <table class="table" id="lbTable">
+      <thead><tr><th>#</th><th>Name</th><th>Score</th><th>Correct</th><th>Level</th><th>Date</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <p id="lbEmpty" class="hint hidden">No results posted yet — finish a test and be the first!</p>
+  </section>
+
+  <!-- ============ YOUR PROGRESS ============ -->
+  <section id="view-progress" class="view hidden">
+    <h2>Your progress</h2>
+    <div class="notice" role="note">
+      This online version saves your progress only in this browser on this device. Accounts, the shared leaderboard and the admin panel run in the full BrainGenius app — its source code is in this GitHub repository.
+    </div>
+    <div class="card">
+      <h3>Your display name</h3>
+      <div class="lb-post">
+        <input type="text" id="playerName" maxlength="30" placeholder="e.g. Alex" aria-label="Your display name">
+        <button class="btn" id="saveNameBtn">Save name</button>
+        <span id="nameMsg" class="feedback"></span>
+      </div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat"><strong id="stTests">0</strong><span>tests taken</span></div>
+      <div class="stat"><strong id="stAvg">0%</strong><span>average score</span></div>
+      <div class="stat"><strong id="stBest">0%</strong><span>best score</span></div>
+      <div class="stat"><strong id="stDaily">0</strong><span>daily challenges</span></div>
+    </div>
+    <div class="card">
+      <h3>Strengths by category</h3>
+      <div id="stCategories"></div>
+      <h4>Progress over time</h4>
+      <div id="stProgress" class="progress-list"></div>
+    </div>
+    <div class="card">
+      <h3>Badges</h3>
+      <div id="badges" class="badge-grid"></div>
+    </div>
+    <div class="card">
+      <h3>Retake a level</h3>
+      <div class="actions wrap">
+        <button class="btn" data-retake="easy">Easy test</button>
+        <button class="btn" data-retake="medium">Medium test</button>
+        <button class="btn" data-retake="hard">Hard test</button>
+        <button class="btn" data-retake="mixed">Mixed test</button>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Previous results</h3>
+      <table class="table" id="historyTable">
+        <thead><tr><th>Date</th><th>Type</th><th>Level</th><th>Score</th><th>Correct</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <button class="btn btn-danger" id="clearDataBtn">Clear all my saved data on this device</button>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="view-about" class="view hidden">
+    <h2>About BrainGenius</h2>
+    <div class="card">
+      <p>BrainGenius – IQ Test &amp; Brain Challenge is a friendly place to exercise your reasoning skills. Our question bank covers six areas that classic reasoning tests draw on: logical reasoning, number series, pattern recognition, verbal reasoning, spatial reasoning and basic mathematical reasoning.</p>
+      <p>Every question is original and comes with an explanation, so each test doubles as practice. This online version runs entirely in your browser — no account, no downloads, nothing sent to a server.</p>
+      <p><strong>Honest note:</strong> BrainGenius is an informal IQ-style reasoning test for fun and practice. It is not a clinically validated IQ assessment, and your percentage score is not a measured IQ. Scores here cannot be compared with standardised IQ tests.</p>
+    </div>
+  </section>
+
+  <!-- ============ PRIVACY ============ -->
+  <section id="view-privacy" class="view hidden">
+    <h2>Privacy Policy</h2>
+    <div class="card legal">
+      <p><em>Last updated: October 2026.</em></p>
+      <h3>This online version</h3>
+      <p>This version of BrainGenius runs entirely in your browser. It collects nothing and sends nothing to any server. Your results, progress, badges, display name and this device's leaderboard are stored only in your browser's local storage, on this device, and you can erase them at any time from the Your Progress page or by clearing your browser data.</p>
+      <h3>No tracking</h3>
+      <p>There are no accounts, no cookies for tracking, no analytics and no advertising in this version.</p>
+      <h3>The full app</h3>
+      <p>The full BrainGenius app (source code in this repository) offers optional accounts. Its privacy practices are described in the policy included with that app.</p>
+    </div>
+  </section>
+
+  <!-- ============ TERMS ============ -->
+  <section id="view-terms" class="view hidden">
+    <h2>Terms and Conditions</h2>
+    <div class="card legal">
+      <p><em>Last updated: October 2026.</em></p>
+      <h3>About the service</h3>
+      <p>BrainGenius provides informal IQ-style reasoning quizzes for entertainment and self-practice. Results are percentages of questions answered correctly; they are not IQ scores and must not be presented as a clinical or professional assessment.</p>
+      <h3>Fair use</h3>
+      <p>Please use respectful display names on the leaderboard. Questions are original and provided for personal use on this site.</p>
+      <h3>Availability</h3>
+      <p>The service is provided "as is" without warranties. We may update questions and features over time.</p>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="view-contact" class="view hidden">
+    <h2>Contact us</h2>
+    <div class="card">
+      <p>This online version has no server, so it cannot receive messages directly. The contact form lives in the full BrainGenius app — you can run it from the source code in this GitHub repository, where messages are stored for the site administrator.</p>
+      <p>If you found a problem with a question, the full app also has a "Report this question" feature on every test question.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>BrainGenius is an informal IQ-style reasoning test for fun and practice. It is not a clinically validated IQ assessment, and your percentage score is not a measured IQ.</p>
+  <nav aria-label="Footer">
+    <button data-nav="about">About Us</button>
+    <button data-nav="privacy">Privacy Policy</button>
+    <button data-nav="terms">Terms and Conditions</button>
+    <button data-nav="contact">Contact Us</button>
+  </nav>
+  <p class="tiny">© 2026 BrainGenius. All questions are original.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
